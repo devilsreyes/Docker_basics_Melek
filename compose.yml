@@ -8,6 +8,8 @@ services:
       - "8080:80"
     environment:
       TZ: 'Europe/Berlin'
+    networks:
+      - lab_net
     restart: unless-stopped
 
   portainer:
@@ -19,6 +21,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./portainer/portainer_data:/data
+    networks:
+      - lab_net
     restart: unless-stopped
 
   pihole:
@@ -33,6 +37,8 @@ services:
     volumes:
       - ./pihole/etc-pihole:/etc/pihole
       - ./pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    networks:
+      - lab_net
     restart: unless-stopped
 
   watchtower:
@@ -42,4 +48,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - DOCKER_API_VERSION=1.40
+    networks:
+      - lab_net
     restart: unless-stopped
+
+networks:
+  lab_net:
+    driver: bridge
