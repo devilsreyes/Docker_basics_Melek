@@ -1,0 +1,4 @@
+pihole/etc-pihole/
+pihole/etc-dnsmasq.d/
+portainer/portainer_data/
+
